@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Work Together</title>
+    <style>
+        
+        #content{
+            text-align: center;
+            margin-top: 100px;
+        }
+        #content #title{
+            font-size: 60px;
+        }
+        #content #timer{    
+            font-size: 50px;
+        }
+    </style>
+</head>
+<body>
+    <main id="content">
+        <h1 id="title">Work Time !</h1>
+        <h2 id="timer"></h2>
+    </main>
+
+</body>
+<script src="/socket.io/socket.io.js"></script>
+
+<script>
+    const socket = io();
+    
+    const timerElem = document.getElementById("timer");
+    const title = document.getElementById("title");
+
+    const formatTime = (time) => time = time<10 ? '0'+time : time;
+    const printCountdown = (min, sec) => timerElem.innerHTML = min + ":" + sec;
+    //var beep = new Audio('./tone.mp3');
+    socket.on('setup',(time)=>{
+        if(!time.mode)title.innerHTML = "Work time !"
+        else title.innerHTML = "Have a break !"
+        setup(time.min,time.sec)
+    })
+
+    setup = (min,sec) => {
+        //beep.play();
+        printCountdown(formatTime(min),formatTime(sec))
+    }
+
+    socket.on('timer', (min,sec) => printCountdown(formatTime(min),formatTime(sec)))
+    socket.on('pause', (min,sec) => printCountdown(formatTime(min),formatTime(sec)))
+
+</script>
+</html>
