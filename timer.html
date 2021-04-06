@@ -14,7 +14,7 @@
         }
     </style>
 </head>
-<body onload="start()">
+<body>
     
     <h1 id="timer"></h1>
     <!-- <button onclick="start()">Start</button>
@@ -26,78 +26,28 @@
 
 <script>
     var socket = io();
-    console.log(socket);
+    //console.log(socket);
     
     var timerElem = document.getElementById("timer")
-
-    var min = 0;
-    var sec = 30;
-    var minLeft = min;
-    var secLeft = sec;
-    var myTimer;
-    var started = false;
     
-    const formatSec = (sec) => sec = sec<10 ? '0'+sec : sec;
-    const formatMin = (sec) => sec = sec<10 ? '0'+sec : sec;
+    const formatTime = (time) => time = time<10 ? '0'+time : time;
     const printCountdown = (min, sec) => timerElem.innerHTML = min + ":" + sec;
     
-    minLeft = formatMin(minLeft);
-    secLeft = formatSec(secLeft);
+    var min=0;
+    var sec=30;
+
+    minLeft = formatTime(min);
+    secLeft = formatTime(sec);
 
     printCountdown(minLeft,secLeft);
 
-    socket.on('timer',function(min,sec){
-        minLeft = min;
-        secLeft = sec;
-        printCountdown(min,sec);
-    })
+    socket.on('timer', (min,sec) => printCountdown(formatTime(min),formatTime(sec)))
+    socket.on('pause', (min,sec) => printCountdown(formatTime(min),formatTime(sec)))
 
-    socket.on('pause',function(min,sec){
-        minLeft = min;
-        secLeft = sec;
-        printCountdown(minLeft,secLeft);
-        clearInterval(myTimer);
-    })
-    
-    function start(){
-        
-        if(!started){
-            myTimer = setInterval(countdown,1000);
-            started = true;
-            function countdown(){
-                if(secLeft != 0){
-                    console.log(started);
-                    secLeft = secLeft-1;
-                    secLeft = formatSec(secLeft);
-
-                    socket.emit('timer', minLeft, secLeft);
-                    //printCountdown(minLeft,secLeft);
-                }
-                else if(secLeft == 0 && minLeft != 0){
-                    minLeft = minLeft - 1;
-                    secLeft = 59;
-                    minLeft = formatMin(minLeft);
-                    secLeft = formatSec(secLeft);
-
-                    socket.emit('timer', minLeft, secLeft);
-                    //printCountdown(minLeft,secLeft);
-                }
-                else if(secLeft == 0 && minLeft == 0){
-                    started = false;
-                    min = formatMin(min);
-                    sec = formatSec(sec);
-                    socket.emit('pause',min,sec);
-                    clearInterval(myTimer);
-                    //alert("End");
-                }        
-            }
-        }
-    }
-
-    function pause(){
+    /*function pause(){
         started = false;
         socket.emit('pause',minLeft, secLeft);
-    }
+    }*/
 
 </script>
 </html>
