@@ -3,7 +3,7 @@
     "version": "0.0.1",
     "description": "my first socket.io app",
     "scripts":{
-        "start": "nodemon timer.js"
+        "start": "nodemon src/index.js"
     },
     "dependencies": {
         "express": "^4.17.1",

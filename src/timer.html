@@ -36,7 +36,7 @@
 
     const formatTime = (time) => time = time<10 ? '0'+time : time;
     const printCountdown = (min, sec) => timerElem.innerHTML = min + ":" + sec;
-    //var beep = new Audio('./tone.mp3');
+    //const beep = new Audio('./tone.mp3');
     socket.on('setup',(time)=>{
         if(!time.mode)title.innerHTML = "Work time !"
         else title.innerHTML = "Have a break !"
@@ -44,7 +44,6 @@
     })
 
     setup = (min,sec) => {
-        //beep.play();
         printCountdown(formatTime(min),formatTime(sec))
     }
 
