@@ -5,8 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Work Together</title>
-    <style>
-        
+    <style>    
         #content{
             text-align: center;
             margin-top: 100px;
@@ -23,6 +22,14 @@
     <main id="content">
         <h1 id="title">Work Time !</h1>
         <h2 id="timer"></h2>
+        <iframe 
+            width="600" 
+            height="350" 
+            src="https://www.youtube.com/embed/bmVKaAV_7-A" 
+            title="YouTube video player" 
+            frameborder="0"
+            allowfullscreen>
+        </iframe>
     </main>
 
 </body>
@@ -30,25 +37,31 @@
 
 <script>
     const socket = io();
-    
     const timerElem = document.getElementById("timer");
     const title = document.getElementById("title");
 
+    const changeBg = (t,color) => {
+        title.innerHTML = t;
+        document.body.style.backgroundColor = color;
+    }
+    
     const formatTime = (time) => time = time<10 ? '0'+time : time;
     const printCountdown = (min, sec) => timerElem.innerHTML = min + ":" + sec;
-    //const beep = new Audio('./tone.mp3');
+
     socket.on('setup',(time)=>{
-        if(!time.mode)title.innerHTML = "Work time !"
-        else title.innerHTML = "Have a break !"
-        setup(time.min,time.sec)
+        
+        const workColor = "#eb534d";
+        const breakTimeColor = "#31d686";
+        if(!time.mode) changeBg("Work time !",workColor);
+        else changeBg("Have a break !",breakTimeColor);
+        
+        printCountdown(formatTime(time.min),formatTime(time.sec));
+        
     })
+    socket.on('timer', (min,sec) => printCountdown(formatTime(min),formatTime(sec)));
 
-    setup = (min,sec) => {
-        printCountdown(formatTime(min),formatTime(sec))
-    }
-
-    socket.on('timer', (min,sec) => printCountdown(formatTime(min),formatTime(sec)))
-    socket.on('pause', (min,sec) => printCountdown(formatTime(min),formatTime(sec)))
 
 </script>
 </html>
+
+
