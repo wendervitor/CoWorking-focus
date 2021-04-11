@@ -5,16 +5,24 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Work Together</title>
-    <style>    
+    <style>
+        *{
+            font-family: sans-serif;   
+        }    
         #content{
             text-align: center;
             margin-top: 100px;
         }
         #content #title{
             font-size: 60px;
+            color: #fff;
         }
         #content #timer{    
             font-size: 50px;
+            color: #fff;
+        }
+        #content #video{
+            margin-top: 40px;
         }
     </style>
 </head>
@@ -22,14 +30,24 @@
     <main id="content">
         <h1 id="title">Work Time !</h1>
         <h2 id="timer"></h2>
+        <form id="form" action="">
+            <input 
+                id="input" 
+                autocomplete="off" 
+                placeholder="YouTube Video URL"
+            />
+            <button type="submit">Play</button>
+        </form>
         <iframe 
+            id = "video"
             width="600" 
             height="350" 
-            src="https://www.youtube.com/embed/bmVKaAV_7-A" 
             title="YouTube video player" 
             frameborder="0"
             allowfullscreen>
         </iframe>
+        
+        
     </main>
 
 </body>
@@ -39,6 +57,9 @@
     const socket = io();
     const timerElem = document.getElementById("timer");
     const title = document.getElementById("title");
+    const form = document.getElementById('form');
+    const input = document.getElementById('input');
+    const video =  document.getElementById('video');
 
     const changeBg = (t,color) => {
         title.innerHTML = t;
@@ -60,6 +81,21 @@
     })
     socket.on('timer', (min,sec) => printCountdown(formatTime(min),formatTime(sec)));
 
+    
+    const extractVideoID = (url) =>{
+        const splittedURL = url.split('/')
+        if(splittedURL[2]=="youtu.be") return splittedURL[3];
+        else return splittedURL[3].substring(8);
+    }
+    
+
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        if (input.value) {
+            video.src="https://www.youtube.com/embed/"+extractVideoID(input.value)
+            input.value = '';
+        }
+    });
 
 </script>
 </html>
