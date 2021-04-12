@@ -48,6 +48,6 @@ exports.countdown = () =>{
     }
     else if(timeLeft.sec == 0 && timeLeft.min == 0){
         timeLeft = handlePomodoro(timeLeft);
-        io.emit('setup',timeLeft);
+        io.emit('endedTime',timeLeft);
     } 
 }

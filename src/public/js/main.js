@@ -4,6 +4,7 @@ const state = document.getElementById("title");
 const form = document.getElementById('form');
 const input = document.getElementById('input');
 const video =  document.getElementById('video');
+const beep = document.getElementById('beep');
 
 
 /**
@@ -42,19 +43,6 @@ const printCountdown = (min, sec) => timerElem.innerHTML = min + ":" + sec;
     else return splittedURL[3].substring(8).replace(/&/g,'?');
 }
 
-socket.on('setup',(time)=>{
-    
-    const workColor = "#eb534d";
-    const breakTimeColor = "#31d686";
-    if(!time.mode) changeBg("Work time !",workColor);
-    else changeBg("Have a break !",breakTimeColor);
-    
-    printCountdown(formatTime(time.min),formatTime(time.sec));
-    
-})
-
-socket.on('timer', (min,sec) => printCountdown(formatTime(min),formatTime(sec)));
-
 form.addEventListener('submit', function(e) {
     e.preventDefault();
     if (input.value) {
@@ -62,3 +50,21 @@ form.addEventListener('submit', function(e) {
         input.value = '';
     }
 });
+
+const setupCountdown = (time) =>{
+    const workColor = "#eb534d";
+    const breakTimeColor = "#31d686";
+    if(!time.mode) changeBg("Work time !",workColor);
+    else changeBg("Have a break !",breakTimeColor);
+    printCountdown(formatTime(time.min),formatTime(time.sec));
+}
+
+socket.on('setup',time => setupCountdown(time))
+
+socket.on('endedTime',time => {
+    setupCountdown(time);
+    beep.play();
+})
+
+socket.on('timer', (min,sec) => printCountdown(formatTime(min),formatTime(sec)));
+

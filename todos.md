@@ -8,6 +8,6 @@
  [ ] Implement Header
  [ ] Tests
  [ ] Deploy first usage version
- [ ] Implement some bip
+ [X] Implement some bip
  [ ] Implement chat
  [ ] Implement rooms
