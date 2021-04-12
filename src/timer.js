@@ -1,5 +1,4 @@
 const socketio = require('socket.io');
-
 let io;
 
 const pomodoroTime = {"mode":0,"min":25,"sec":0}

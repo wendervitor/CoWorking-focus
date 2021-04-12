@@ -1,7 +1,7 @@
 {
-    "name": "socket-chat-example",
+    "name": "work-together",
     "version": "0.0.1",
-    "description": "my first socket.io app",
+    "description": "A sync pomodoro timer to run with others",
     "scripts": {
         "start": "nodemon src/index.js"
     },
