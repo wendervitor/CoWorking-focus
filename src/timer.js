@@ -1,8 +1,8 @@
 const socketio = require('socket.io');
 let io;
 
-const pomodoroTime = {"mode":0,"min":25,"sec":0}
-const breakTime = {"mode":1,"min":5,"sec":0}
+const pomodoroTime = {"mode":0,"min":50,"sec":0}
+const breakTime = {"mode":1,"min":10,"sec":0}
 
 let timeLeft = {"mode":0,"min":pomodoroTime.min,"sec":pomodoroTime.sec};
 

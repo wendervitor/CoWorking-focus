@@ -1,13 +1,13 @@
-## TODOLIST
+### TODOLIST
 
- [X] Make countdown run forever
- [X] Implement a POMODORO
- [X] Refactor folders
- [X] Change background color depending on status (working or break)
- [X] Reorganize folders(css and js on public)
- [ ] Implement Header
- [ ] Tests
- [ ] Deploy first usage version
- [X] Implement some bip
- [ ] Implement chat
- [ ] Implement rooms
+ - [x] Make countdown run forever
+ - [x] Implement a POMODORO
+ - [x] Refactor folders 
+ - [x] Change background color depending on status (working or break)
+ - [x] Reorganize folders(css and js on public)
+ - [X] Implement beep when time is over
+ - [ ] Implement Header
+ - [ ] Tests
+ - [ ] Deploy first usage version 
+ - [ ] Implement Chat
+ - [ ] Implement Rooms
