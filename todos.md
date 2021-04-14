@@ -8,6 +8,6 @@
  - [X] Implement beep when time is over
  - [ ] Implement Header
  - [ ] Tests
- - [ ] Deploy first usage version 
+ - [x] Deploy first usage version 
  - [ ] Implement Chat
  - [ ] Implement Rooms
