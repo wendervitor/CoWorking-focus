@@ -1,8 +1,8 @@
 # CoWorking-focus
 
-A Simple app build with Node.js + Express + Socket.io to help in your Coworking. It has a timer, inspired in *_Pomodoro Technique_*, synchronized with all users and you can use it to manage your time together with others.
+A Simple app build with Node.js + Express + Socket.io to help in your Coworking. It has a timer, inspired in **_Pomodoro Technique_**, synchronized with all users and you can use it to manage your time together with others.
 
-You can see the app running *[here](https://coworking-focus.herokuapp.com/)*
+You can see the app running **[here](https://coworking-focus.herokuapp.com/)**
 
 ## Getting started
 
@@ -32,8 +32,33 @@ or
 npm run dev
 ```
 
-## Contribute
+And you can test with:
 
-If you want to contribute to the project, just fork, clone into your computer , make the changes you need and send a pull request
-If you run into any bug or problem with this app, write in the issues section of this repo.
-Since this project is for my personal portfolio, you can (re)use it however you want.
+```
+yarn test
+```
+or
+```
+npm test
+```
+
+## Technologies 
+
+* Node.js
+* Express.js
+* Socket.io
+* Mocha
+* Nodemon
+
+
+## Contributing
+
+1. Fork it (<https://github.com/yourname/yourproject/fork>)
+2. Create your feature branch (`git checkout -b feature/fooBar`)
+3. Commit your changes (`git commit -am 'Add some fooBar'`)
+4. Push to the branch (`git push origin feature/fooBar`)
+5. Create a new Pull Request
+6. If you want to report a bug or problem with this app, write in the issues section of this repo.
+7. Since this project is for my personal portfolio, you can (re)use it however you want.
+
+

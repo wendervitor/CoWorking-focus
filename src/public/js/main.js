@@ -20,7 +20,7 @@ const changeBg = (title,color) => {
 /**
  * Format the visual of minutes or seconds (e.g. 9 -> 09)
  * @param {original time in seconds or minutes} time 
- * @returns time formated
+ * @returns time formatted
  */
 const formatTime = (time) => time = time < 10 ? '0'+time : time;
 
@@ -28,7 +28,6 @@ const formatTime = (time) => time = time < 10 ? '0'+time : time;
  * print the countdown into the DOM
  * @param {minutes} min 
  * @param {seconds} sec 
- * @returns 
  */
 const printCountdown = (min, sec) => timerElem.innerHTML = min + ":" + sec;
 
@@ -43,14 +42,10 @@ const printCountdown = (min, sec) => timerElem.innerHTML = min + ":" + sec;
     else return splittedURL[3].substring(8).replace(/&/g,'?');
 }
 
-form.addEventListener('submit', function(e) {
-    e.preventDefault();
-    if (input.value) {
-        video.src="https://www.youtube.com/embed/"+extractVideoID(input.value)
-        input.value = '';
-    }
-});
-
+/**
+ * Set the countdown and can change background color 
+ * @param {current time} time 
+ */
 const setupCountdown = (time) =>{
     const workColor = "#eb534d";
     const breakTimeColor = "#31d686";
@@ -58,6 +53,15 @@ const setupCountdown = (time) =>{
     else changeBg("Have a break !",breakTimeColor);
     printCountdown(formatTime(time.min),formatTime(time.sec));
 }
+
+
+form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    if (input.value) {
+        video.src="https://www.youtube.com/embed/"+extractVideoID(input.value)
+        input.value = '';
+    }
+});
 
 socket.on('setup',time => setupCountdown(time))
 

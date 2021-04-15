@@ -4,13 +4,17 @@
     "description": "A sync pomodoro timer to run with others",
     "scripts": {
         "dev": "nodemon src/index.js",
-        "start": "node src/index.js"
+        "start": "node src/index.js",
+        "test": "mocha __tests__/**/*.js"
     },
     "dependencies": {
         "express": "^4.17.1",
         "socket.io": "^4.0.1"
     },
     "devDependencies": {
-        "nodemon": "^2.0.7"
+        "chai": "^4.3.4",
+        "mocha": "^8.3.2",
+        "nodemon": "^2.0.7",
+        "socket.io-client": "^4.0.1"
     }
 }

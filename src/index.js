@@ -4,11 +4,12 @@ const express = require('express');
 const app = express();
 const server = require('http').Server(app);
 
-const { setUpTimer, countdown } = require('./timer');
+const { setUpTimer, initTimer } = require('./timer');
 
 app.use(express.static(path.join(__dirname,'public')));
+
 setUpTimer(server);
-const myTimer = setInterval(countdown,1000);
+const myTimer = initTimer();
 
 const PORT = process.env.PORT || 3000;
 server.listen(PORT, () => {
