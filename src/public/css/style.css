@@ -28,9 +28,18 @@
     -webkit-text-fill-color: transparent;
 }
 
-
-
-
 .content #desc{
     font-size: 2rem;
+    margin-bottom: 150px;
+}
+
+.content #room{
+    min-width: 250px;
+    height: 50px;
+    font-size: 20px;
+    margin-right: 5px;
+}
+.content #joinBtn{
+    height: 40px;
+    font-size: 15px;
 }
