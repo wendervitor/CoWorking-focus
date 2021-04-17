@@ -39,7 +39,7 @@ const handlePomodoro = (time) => {
     return time;
 }
 
-exports.countdown = (io,room) =>{
+const countdown = (io,room) =>{
     
     if(room.timeLeft.sec != 0){
         room.timeLeft.sec -= 1;       
@@ -57,7 +57,7 @@ exports.countdown = (io,room) =>{
 }
 
 
-exports.createRoom = (roomID) => {
+const createRoom = (roomID) => {
     let room = rooms.find(r => r.id == roomID)
     if(!room){
         room = {
@@ -73,5 +73,21 @@ exports.createRoom = (roomID) => {
         rooms.push(room);
     }
     return room;
+}
+
+const joinRoom = (io,socket,roomID) =>{
+    let room = createRoom(roomID);
+    socket.join(room);
+    console.log("User " + socket.id + " joined "+ room.id );
+    io.to(room).emit('setup',room.timeLeft);      
+    if(!room.started){
+        room.countdown = setInterval(()=>{countdown(io,room)},1000)
+        room.started = 1;
+    }
+}
+
+module.exports = {
+    joinRoom,
+    createRoom
 }
 

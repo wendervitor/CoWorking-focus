@@ -1,5 +1,5 @@
 const socketio = require('socket.io');
-const { createRoom, countdown } = require('./utils/rooms')
+const { joinRoom } = require('./utils/rooms')
 
 let io;
 
@@ -11,17 +11,7 @@ exports.setUpTimer = (server) => {
 
         socket.on('joinRoom',(roomID)=>{
             roomID = roomID.toLowerCase();
-            room = createRoom(roomID);
-            
-            socket.join(room);
-            console.log("User " + socket.id + " joined "+ room.id );
-            io.to(room).emit('setup',room.timeLeft);
-            
-            
-            if(!room.started){
-                room.countdown = setInterval(()=>{countdown(io,room)},1000)
-                room.started = 1;
-            }
+            joinRoom(io,socket,roomID);
         })
 
         socket.on('disconnect', () => {
