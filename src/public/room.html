@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
     <link rel="stylesheet" href="css/style.css">
     <title>CoWorking Focus</title>
 </head>
@@ -11,6 +15,13 @@
     <main class="content">
         <h1 id="title">Work Time !</h1>
         <h2 id="timer"></h2>
+        <button class="actionBtn" onclick="startTimer();">
+            <i class="fa fa-play" aria-hidden="true"></i>
+        </button>
+        <button class="actionBtn" onclick="pauseTimer();">
+            <i class="fa fa-pause" aria-hidden="true"></i>
+        </button>
+        <!-- <button disabled="disabled">Stop</button> -->
         <form id="form" action="">
             <input 
                 id="input" 
@@ -19,6 +30,7 @@
             />
             <button type="submit">Play</button>
         </form>
+        
         <iframe 
             id = "video"
             width="600" 

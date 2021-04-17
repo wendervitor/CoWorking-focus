@@ -14,7 +14,7 @@ const pomodoro = [
 const rooms = [
     {
         "id": "general",
-        "started": 0,
+        "started": false,
         "timeLeft":{
             "mode": pomodoro[0].id,
             "min": pomodoro[0].time[0],
@@ -62,7 +62,7 @@ const createRoom = (roomID) => {
     if(!room){
         room = {
             "id": roomID,
-            "started": 0,
+            "started": false,
             "timeLeft":{
                 "mode": pomodoro[0].id,
                 "min": pomodoro[0].time[0],
@@ -79,15 +79,31 @@ const joinRoom = (io,socket,roomID) =>{
     let room = createRoom(roomID);
     socket.join(room);
     console.log("User " + socket.id + " joined "+ room.id );
-    io.to(room).emit('setup',room.timeLeft);      
+    io.to(room).emit('setup',room.timeLeft);
+}
+
+const startTimer = (io,roomID) =>{
+    let room = createRoom(roomID);
     if(!room.started){
         room.countdown = setInterval(()=>{countdown(io,room)},1000)
         room.started = 1;
     }
 }
 
+const pauseTimer = (io,roomID) =>{
+    let room = createRoom(roomID);
+    if(room.started){
+        //room.countdown
+        clearInterval(room.countdown);
+        room.started = false;
+    }
+}
+
+
 module.exports = {
     joinRoom,
-    createRoom
+    createRoom,
+    startTimer,
+    pauseTimer
 }
 

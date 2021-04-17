@@ -7,12 +7,13 @@
     <link rel="stylesheet" href="css/style.css">
     <title>CoWorking Focus</title>
 </head>
-<body>
+<body onload="generateKey();">
     <main class="content">
         <h1 id="appName">CoWorking Focus</h1>
         <h2 id="desc"> A app to help increase your team focus !</h2>
 
         <form id="joinForm" action="room.html">
+            <label for="room">Room ID: </label>
             <input
                 type="text"
                 name="room"
@@ -22,21 +23,28 @@
             />
             <button id="joinBtn" type="submit">Join</button>
         </form>
-        <!-- <div style="margin-top: 20px; ">
-            <strong>How it Works</strong>
-            <div style="flex-direction: column;">
-                <h3>1</h3>
-                <h4>Create a Room</h4>
-                <p>Just enter the name of your room, if it's already created, you will join the room</p>
-                <h3>2</h3>
-                <h4>Share to your team</h4>
-                <p>Share the name of your room or the page URL to your team/partner so they can join with you</p>
-                <h3>3</h3>
-                <h4>Let's Work</h4>
-                <p>Use the pomodoro counter to help increase team productivity and enjoy it !</p>
-            </div>
-        </div> -->
-
+        <div style="margin-top: 30px;">
+            <strong style="font-size: 1.8rem; opacity: 0.4;">How it Works</strong> 
+            <div class="row">
+                
+                <div class="column">
+                    <h3>1</h3> 
+                    <h4>Create/Join a Room</h4>
+                    <p>Just enter the name of your room, if it's already created, you will join the room.</p>
+                </div>
+                <div class="column">
+                    <h3>2</h3>
+                    <h4>Share to your team</h4>
+                    <p>Share the name of your room or the page URL to your team/partner so they can join.</p>
+                </div>
+                <div class="column">    
+                    <h3>3</h3>
+                    <h4>Let's Work</h4>
+                    <p>Use the pomodoro counter to help increase team productivity and enjoy it !</p>
+                </div>
+            </div>  
+        </div>
     </main>
+    <script src="js/index.js"></script>
 </body>
 </html>

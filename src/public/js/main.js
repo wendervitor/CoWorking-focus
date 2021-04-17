@@ -20,6 +20,7 @@ const roomID = getUrlParameter("room");
 socket.emit('joinRoom', roomID);
 
 
+
 /**
  * Set the title and background color of the actual state of pomodoro 
  * @param {title of the actual pomodoro state} title 
@@ -71,6 +72,13 @@ const setupCountdown = (time) =>{
     printCountdown(formatTime(time.min),formatTime(time.sec));
 }
 
+const startTimer = () => {
+    socket.emit('start');
+}
+
+const pauseTimer = () => {
+    socket.emit('stop');
+}
 
 form.addEventListener('submit', function(e) {
     e.preventDefault();
