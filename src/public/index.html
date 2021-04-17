@@ -4,38 +4,28 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Work Together</title>
-    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/style.css">
+    <title>CoWorking Focus</title>
 </head>
 <body>
-    <main id="content">
-        <h1 id="title">Work Time !</h1>
-        <h2 id="timer"></h2>
-        <form id="form" action="">
-            <input 
-                id="input" 
-                autocomplete="off" 
-                placeholder="YouTube Video URL"
+    <main class="content">
+        <h1 id="appName">CoWorking Focus</h1>
+        <h2 id="desc"> A app to help increase your team focus !</h2>
+
+        <form id="joinForm" action="room.html">
+             
+            <input
+                type="text"
+                name="room"
+                id="room"
+                placeholder="Enter Room Id..."
+                required
             />
-            <button type="submit">Play</button>
+            <button type="submit">Join</button>
         </form>
-        <iframe 
-            id = "video"
-            width="600" 
-            height="350" 
-            title="YouTube video player" 
-            frameborder="0"
-            allowfullscreen>
-        </iframe>
+        <!-- <button disabled="disabled">Create</button>
+        <button id="joinBtn" onclick="joinRoom()">Join</button> -->
+        <!-- <a href="room.html">Click here</a> -->
     </main>
-
-    <audio id="beep">
-        <source src="assets/tone.mp3" type="audio/mpeg">
-    </audio>
-
 </body>
-<script src="/socket.io/socket.io.js"></script>
-<script src="js/main.js"></script>
 </html>
-
-

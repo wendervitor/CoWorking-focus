@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>CoWorking Focus</title>
+</head>
+<body>
+    <main class="content">
+        <h1 id="title">Work Time !</h1>
+        <h2 id="timer"></h2>
+        <form id="form" action="">
+            <input 
+                id="input" 
+                autocomplete="off" 
+                placeholder="YouTube Video URL"
+            />
+            <button type="submit">Play</button>
+        </form>
+        <iframe 
+            id = "video"
+            width="600" 
+            height="350" 
+            title="YouTube video player" 
+            frameborder="0"
+            allowfullscreen>
+        </iframe>
+    </main>
+
+    <audio id="beep">
+        <source src="assets/tone.mp3" type="audio/mpeg">
+    </audio>
+
+    <script src="/socket.io/socket.io.js"></script> 
+    <script src="js/main.js"></script>
+</body>
+</html>
+
+

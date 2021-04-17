@@ -7,9 +7,10 @@
  - [x] Reorganize folders(css and js on public)
  - [X] Implement beep when time is over
  - [x] Deploy first usage version 
+ - [x] Implement Rooms (without control of users yet)
+ - [x] Display time remaining in title of the app
  - [ ] Implement Header
+ - [ ] Give control of pomodoro time to owner of room
  - [ ] Tests
  - [ ] Implement Chat
- - [ ] Implement Rooms
- - [ ] Feature to see the time remaining in title of the app
  - [ ] Change Beep

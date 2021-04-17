@@ -1,0 +1,36 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap');
+
+*{
+    font-family: 'Ubuntu', sans-serif;   
+}    
+.content{
+    text-align: center;
+    margin-top: 100px;
+}
+.content #title{
+    font-size: 60px;
+    color: #fff;
+}
+.content #timer{    
+    font-size: 50px;
+    color: #fff;
+}
+.content #video{
+    margin-top: 40px;
+}
+
+.content #appName{
+    font-size: 7rem;
+    margin-bottom: 2px;
+    background-color: #FBAB7E;
+    background-image: -webkit-linear-gradient(62deg, #FBAB7E 0%, #F7CE68 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+
+
+
+.content #desc{
+    font-size: 2rem;
+}

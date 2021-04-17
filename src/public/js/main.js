@@ -1,10 +1,23 @@
 const socket = io();
+
 const timerElem = document.getElementById("timer");
 const state = document.getElementById("title");
 const form = document.getElementById('form');
 const input = document.getElementById('input');
 const video =  document.getElementById('video');
 const beep = document.getElementById('beep');
+
+
+function getUrlParameter(name) {
+    name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+    var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+    var results = regex.exec(location.search);
+    return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+};
+
+const roomID = getUrlParameter("room");
+
+socket.emit('joinRoom', roomID);
 
 
 /**
@@ -29,7 +42,11 @@ const formatTime = (time) => time = time < 10 ? '0'+time : time;
  * @param {minutes} min 
  * @param {seconds} sec 
  */
-const printCountdown = (min, sec) => timerElem.innerHTML = min + ":" + sec;
+const printCountdown = (min, sec) => {
+    const actualTime = min + ":" + sec;
+    timerElem.innerHTML = actualTime;
+    document.title = actualTime +" "+ state.innerHTML
+}
 
 /**
  * extract the video id from a YouTube URL (only the part after "v=") to embed in page
