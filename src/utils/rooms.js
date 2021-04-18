@@ -93,7 +93,6 @@ const startTimer = (io,roomID) =>{
 const pauseTimer = (io,roomID) =>{
     let room = createRoom(roomID);
     if(room.started){
-        //room.countdown
         clearInterval(room.countdown);
         room.started = false;
     }

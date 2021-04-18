@@ -8,14 +8,12 @@
     text-align: center;
     margin-top: 100px;
 }
+.content #timer,
 .content #title{
     font-size: 60px;
     color: #fff;
 }
-.content #timer{    
-    font-size: 50px;
-    color: #fff;
-}
+
 .content #video{
     margin-top: 40px;
 }
@@ -63,7 +61,7 @@
 }
 
 .actionBtn:hover{
-    color: #ede8e8;
+    color: #ddd5d5; 
 }
 
 .row {

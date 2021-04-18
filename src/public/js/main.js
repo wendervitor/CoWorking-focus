@@ -8,19 +8,6 @@ const video =  document.getElementById('video');
 const beep = document.getElementById('beep');
 
 
-function getUrlParameter(name) {
-    name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
-    var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
-    var results = regex.exec(location.search);
-    return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
-};
-
-const roomID = getUrlParameter("room");
-
-socket.emit('joinRoom', roomID);
-
-
-
 /**
  * Set the title and background color of the actual state of pomodoro 
  * @param {title of the actual pomodoro state} title 
@@ -47,6 +34,18 @@ const printCountdown = (min, sec) => {
     const actualTime = min + ":" + sec;
     timerElem.innerHTML = actualTime;
     document.title = actualTime +" "+ state.innerHTML
+}
+
+/**
+ * A regex function to search for a specific query in a url
+ * @param {name of query needed} name 
+ * @returns value of query or null
+ */
+ function getUrlParameter(name) {
+    name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+    var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+    var results = regex.exec(location.search);
+    return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
 }
 
 /**
@@ -87,6 +86,10 @@ form.addEventListener('submit', function(e) {
         input.value = '';
     }
 });
+
+const roomID = getUrlParameter("room");
+
+socket.emit('joinRoom', roomID);
 
 socket.on('setup',time => setupCountdown(time))
 
