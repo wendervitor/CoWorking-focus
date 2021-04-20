@@ -12,9 +12,8 @@
  - [x] Give control of pomodoro time to owner of room
  - [x] Add "How it works"
  - [x] Implement a better way to join in rooms
+ - [x] Tests
  
- 
- - [ ] Tests
  - [ ] Refactor names of variables
  - [ ] Responsive Design
  

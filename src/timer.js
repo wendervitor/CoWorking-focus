@@ -18,9 +18,9 @@ exports.setUpTimer = (server) => {
                 startTimer(io,roomID);
             });
             
-            socket.on('stop',()=>{
-                console.log("Stop Timer");
-                pauseTimer(io,roomID);
+            socket.on('pause',()=>{
+                console.log("Pause Timer");
+                pauseTimer(roomID);
             });
         });
         
@@ -32,6 +32,3 @@ exports.setUpTimer = (server) => {
         
     });
 }
-
-
-//exports.initTimer = () => setInterval(countdown,1000);

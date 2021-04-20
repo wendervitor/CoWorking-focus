@@ -56,7 +56,6 @@ const countdown = (io,room) =>{
     } 
 }
 
-
 const createRoom = (roomID) => {
     let room = rooms.find(r => r.id == roomID)
     if(!room){
@@ -75,14 +74,14 @@ const createRoom = (roomID) => {
     return room;
 }
 
-const joinRoom = (io,socket,roomID) =>{
+const joinRoom = (io,socket,roomID) => {
     let room = createRoom(roomID);
     socket.join(room);
     console.log("User " + socket.id + " joined "+ room.id );
     io.to(room).emit('setup',room.timeLeft);
 }
 
-const startTimer = (io,roomID) =>{
+const startTimer = (io,roomID) => {
     let room = createRoom(roomID);
     if(!room.started){
         room.countdown = setInterval(()=>{countdown(io,room)},1000)
@@ -90,7 +89,7 @@ const startTimer = (io,roomID) =>{
     }
 }
 
-const pauseTimer = (io,roomID) =>{
+const pauseTimer = (roomID) => {
     let room = createRoom(roomID);
     if(room.started){
         clearInterval(room.countdown);

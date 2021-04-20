@@ -71,13 +71,10 @@ const setupCountdown = (time) =>{
     printCountdown(formatTime(time.min),formatTime(time.sec));
 }
 
-const startTimer = () => {
-    socket.emit('start');
-}
+const startTimer = () => socket.emit('start');
 
-const pauseTimer = () => {
-    socket.emit('stop');
-}
+const pauseTimer = () => socket.emit('pause');
+
 
 form.addEventListener('submit', function(e) {
     e.preventDefault();

@@ -1,79 +1,58 @@
-const { createServer } = require("http");
-const { Server } = require("socket.io");
-const Client = require("socket.io-client");
+var io = require('socket.io-client')
 const assert = require("chai").assert;
-const { createRoom, countdown } = require("../src/utils/rooms")
 
-describe("my awesome project", () => {
-    let io, serverSocket, clientSocket;
+testRoom = {
+    "id": "room1",
+    "started": false,
+    "timeLeft":{
+        "mode": 0,
+        "min": 50,
+        "sec": 0,
+    },
+    "countdown": ""
+}
 
-    before((done) => {
-        const httpServer = createServer();
-        
-        io = new Server(httpServer);
-        httpServer.listen(() => {
-            const port = httpServer.address().port;
-            clientSocket = new Client(`http://localhost:${port}`);
-            io.on("connection", (socket) => {
-                serverSocket = socket;
-            });
-            clientSocket.on("connect", done);
+const { createRoom, countdown, joinRoom } = require("../src/utils/rooms")
+
+
+describe('Suite of unit tests', function () {
+    var socket;
+
+    beforeEach(function (done) {
+        socket = io.connect('http://localhost:3000', {
+            'reconnection delay': 0,
+            'reopen delay': 0,
+            'force new connection': true
         });
-    });
-
-    after(() => {
-        io.close();
-        clientSocket.close();
-    });
-
-    it("should work", (done) => {
-        clientSocket.on("hello", (arg) => {
-            assert.equal(arg, "world");
+        socket.on('connect', function () {
             done();
         });
-        serverSocket.emit("hello", "world");
-    });
 
-    it("should work (with ack)", (done) => {
-        serverSocket.on("hi", (cb) => {
-            cb("hola");
-        });
-        clientSocket.emit("hi", (arg) => {
-            assert.equal(arg, "hola");
-            done();
-        });
     });
-
-    it("creating existing room", (done) =>{
-        assert.equal( createRoom("general").id,"general");
+    afterEach(function (done) {
+        if (socket.connected)socket.disconnect();
         done();
     });
 
-    it("creating new room", (done)=>{
-        assert.equal( createRoom("test1").id,"test1");
-        assert.equal( createRoom("test2").id,"test2");
-        done();
+    describe('CoWorking Focus tests', function () {
+        it('Search existing room ',(done)=>{
+            assert.equal( createRoom("general").id,"general");
+            done();
+        });
+        it('Create and push new room ',(done)=>{
+            assert.equal( createRoom("room1").id,"room1");
+            assert.equal( createRoom("room2").id,"room2");
+            done();
+        });
+        it("Join a room", (done)=>{
+            socket.emit('joinRoom',"room1")
+            socket.on('setup',(timeLeft)=>{
+                assert.equal(timeLeft.id,testRoom.timeLeft.id);
+                assert.equal(timeLeft.min,testRoom.timeLeft.min);
+                assert.equal(timeLeft.sec,testRoom.timeLeft.sec);
+                done();
+            })
+        });
     });
-
-    // it("countdown 1", (done)=>{
-    //     const room = {
-    //         "id": "test1",
-    //         "started": 0,
-    //         "timeLeft":{
-    //             "mode": 0,
-    //             "min": 0,
-    //             "sec": 10,
-    //         },
-    //         "countdown": ""
-    //     }
-    //     serverSocket.join(room);
-    //     countdown(serverSocket,room);
-    //     clientSocket.on("timer",(min,sec)=>{
-            
-    //         assert.equal(room.min,min);
-    //         assert.equal((room.sec-1),sec);
-    //         done();
-    //     })
-    // })
 
 });
