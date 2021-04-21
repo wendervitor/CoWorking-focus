@@ -1,42 +1,42 @@
-const pomodoro = [
-    { 
-        "id": 0,
-        "state": "work",
-        "time": [50,0]
-    },
-    {
-        "id": 1,
-        "state": "break",
-        "time": [10,0]
-    }
-];
-
 const rooms = [
     {
         "id": "general",
         "started": false,
+        "pomodoro": [
+            { 
+                "id": 0,
+                "state": "work",
+                "time": [0,10]
+            },
+            {
+                "id": 1,
+                "state": "break",
+                "time": [0,5]
+            }
+        ],
         "timeLeft":{
-            "mode": pomodoro[0].id,
-            "min": pomodoro[0].time[0],
-            "sec": pomodoro[0].time[1],
+            "mode": 0,
+            "min": 0,
+            "sec": 10,
         },
-        "countdown": ""
+        "countdown": "",
+        "users": []
     },
 ]
 
 
-const handlePomodoro = (time) => {
+const handlePomodoro = (room) => {
     
-    if(time.mode){
-        time.min = pomodoro[0].time[0];
-        time.sec = pomodoro[0].time[1];
+    if(room.timeLeft.mode){
+        room.timeLeft.min = room.pomodoro[0].time[0];
+        room.timeLeft.sec = room.pomodoro[0].time[1];
     }
     else{
-        time.min = pomodoro[1].time[0];
-        time.sec = pomodoro[1].time[1];
+        room.timeLeft.min = room.pomodoro[1].time[0];
+        room.timeLeft.sec = room.pomodoro[1].time[1];
     }
-    time.mode = !time.mode;
-    return time;
+    room.timeLeft.mode = !room.timeLeft.mode;
+    return room;
 }
 
 const countdown = (io,room) =>{
@@ -51,7 +51,7 @@ const countdown = (io,room) =>{
         io.to(room).emit('timer',room.timeLeft.min,room.timeLeft.sec);   
     }
     else if(room.timeLeft.sec == 0 && room.timeLeft.min == 0){
-        room.timeLeft = handlePomodoro(room.timeLeft);
+        room = handlePomodoro(room);
         io.to(room).emit('endedTime',room.timeLeft);
     } 
 }
@@ -62,12 +62,25 @@ const createRoom = (roomID) => {
         room = {
             "id": roomID,
             "started": false,
+            "pomodoro": [
+                { 
+                    "id": 0,
+                    "state": "work",
+                    "time": [50,0]
+                },
+                {
+                    "id": 1,
+                    "state": "break",
+                    "time": [10,0]
+                }
+            ],
             "timeLeft":{
-                "mode": pomodoro[0].id,
-                "min": pomodoro[0].time[0],
-                "sec": pomodoro[0].time[1],
+                "mode": 0,
+                "min": 50,
+                "sec": 0,
             },
-            "countdown": ""
+            "countdown": "",
+            "users":[]
         }
         rooms.push(room);
     }
@@ -76,6 +89,7 @@ const createRoom = (roomID) => {
 
 const joinRoom = (io,socket,roomID) => {
     let room = createRoom(roomID);
+    room.users.push(socket.id);
     socket.join(room);
     console.log("User " + socket.id + " joined "+ room.id );
     io.to(room).emit('setup',room.timeLeft);
@@ -98,14 +112,37 @@ const pauseTimer = (roomID) => {
     return room;
 }
 
+const clearTime = (room) =>{
+    if(room){
+        room.timeLeft.mode = room.pomodoro[0].id;
+        room.timeLeft.min = room.pomodoro[0].time[0];
+        room.timeLeft.sec = room.pomodoro[0].time[1];
+    }
+}
+
 const stopTimer = (io,roomID) => {
     let room = pauseTimer(roomID);
-    if(room){
-        room.timeLeft.mode = pomodoro[0].id;
-        room.timeLeft.min = pomodoro[0].time[0];
-        room.timeLeft.sec = pomodoro[0].time[1];
-    }
+    clearTime(room);
     io.to(room).emit('setup',room.timeLeft);
+}
+
+const removeRoom = (room) =>{
+    rooms.splice(rooms.indexOf(room),1);
+    console.log(rooms);
+}
+
+const handleUserLeft = (socket) =>{
+    room = rooms.find(room =>{
+        return room.users.indexOf(socket.id) != -1 ? room : "";
+    })
+    if(room){
+        room.users.splice(room.users.indexOf(socket.id),1);
+        if(room.users.length === 0){
+            clearTime(room);
+            console.log("alou");
+            removeRoom(room);
+        }
+    }
 }
 
 
@@ -114,6 +151,6 @@ module.exports = {
     createRoom,
     startTimer,
     pauseTimer,
-    stopTimer
+    stopTimer,
+    handleUserLeft
 }
-

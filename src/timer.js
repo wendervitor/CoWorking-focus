@@ -1,5 +1,5 @@
 const socketio = require('socket.io');
-const { startTimer, joinRoom, pauseTimer,stopTimer } = require('./utils/rooms')
+const { startTimer, joinRoom, pauseTimer,stopTimer, handleUserLeft } = require('./utils/rooms')
 
 let io;
 
@@ -28,10 +28,8 @@ exports.setUpTimer = (server) => {
                 stopTimer(io,roomID);
             });
         });
-        
-        
-
         socket.on('disconnect', () => {
+            handleUserLeft(socket)
             console.log('user disconnected');
         });
         

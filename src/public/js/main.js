@@ -73,7 +73,11 @@ const setupCountdown = (time) =>{
 
 const startTimer = () => socket.emit('start');
 const pauseTimer = () => socket.emit('pause');
-const stopTimer = () => socket.emit('stop');
+const stopTimer = () => {
+    if (confirm("Do you want to cancel the Pomodoro Counter?\n")) {
+        socket.emit('stop');    
+    }
+}
 
 
 form.addEventListener('submit', function(e) {

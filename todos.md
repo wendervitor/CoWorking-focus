@@ -14,14 +14,17 @@
  - [x] Implement a better way to join in rooms
  - [x] Settings Tests
  - [x] Responsive Design
+ - [x] Button to stop counter
  
  - [ ] Implement Header
     - [ ] Exit Button
- - [ ] Refactor functions of room.js(setup server, ...)
- - [x] Button to stop counter
+ - [ ] Refactor functions of room.js
+    - [ ] Find room function
+    - [ ] setup server 
+ 
  - [ ] Feature to configure time
  - [ ] Implement a "real" pomodoro(long and short breaks)
- - [ ] Implement a way to stop and delete the counter/room if there's no users
+ - [x] Implement a way to stop and delete the counter/room if there's no users
  
  - [ ] Implement Chat
  - [ ] Change Beep
