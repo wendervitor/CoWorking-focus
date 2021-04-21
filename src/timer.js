@@ -1,5 +1,5 @@
 const socketio = require('socket.io');
-const { startTimer, joinRoom, pauseTimer } = require('./utils/rooms')
+const { startTimer, joinRoom, pauseTimer,stopTimer } = require('./utils/rooms')
 
 let io;
 
@@ -21,6 +21,11 @@ exports.setUpTimer = (server) => {
             socket.on('pause',()=>{
                 console.log("Pause Timer");
                 pauseTimer(roomID);
+            });
+            
+            socket.on('stop',()=>{
+                console.log("Stop Timer");
+                stopTimer(io,roomID);
             });
         });
         

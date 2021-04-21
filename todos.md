@@ -12,13 +12,13 @@
  - [x] Give control of pomodoro time to owner of room
  - [x] Add "How it works"
  - [x] Implement a better way to join in rooms
- - [x] Tests
- 
- - [ ] Refactor names of variables
- - [ ] Responsive Design
+ - [x] Settings Tests
+ - [x] Responsive Design
  
  - [ ] Implement Header
- - [ ] Button to stop counter
+    - [ ] Exit Button
+ - [ ] Refactor functions of room.js(setup server, ...)
+ - [x] Button to stop counter
  - [ ] Feature to configure time
  - [ ] Implement a "real" pomodoro(long and short breaks)
  - [ ] Implement a way to stop and delete the counter/room if there's no users

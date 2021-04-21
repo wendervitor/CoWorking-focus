@@ -95,6 +95,17 @@ const pauseTimer = (roomID) => {
         clearInterval(room.countdown);
         room.started = false;
     }
+    return room;
+}
+
+const stopTimer = (io,roomID) => {
+    let room = pauseTimer(roomID);
+    if(room){
+        room.timeLeft.mode = pomodoro[0].id;
+        room.timeLeft.min = pomodoro[0].time[0];
+        room.timeLeft.sec = pomodoro[0].time[1];
+    }
+    io.to(room).emit('setup',room.timeLeft);
 }
 
 
@@ -102,6 +113,7 @@ module.exports = {
     joinRoom,
     createRoom,
     startTimer,
-    pauseTimer
+    pauseTimer,
+    stopTimer
 }
 

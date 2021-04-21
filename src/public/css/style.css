@@ -46,7 +46,8 @@
 }
 
 .fa-play, 
-.fa-pause{
+.fa-pause,
+.fa-stop{
     font-size: 50px;
     text-shadow: 2px 4px 6px #ede8e8;
 }
@@ -67,6 +68,9 @@
 .row {
     margin-top: 5px;
     display: flex;
+    -webkit-column-width: 150px;
+    -moz-column-width: 150px;
+         column-width: 150px;
 }
 
 .column {
@@ -85,4 +89,21 @@
 
 .column > p{
     font-size: 1.1rem;
+}
+
+@media only screen and (max-width: 950px) {
+    .row{
+        flex-direction: column;
+    }
+}
+
+@media only screen and (max-width: 580px) {
+
+    .content #appName { 
+       font-size: 4.2rem; 
+    }
+    .content #desc{
+        font-size: 1rem;
+    }
+ 
 }
