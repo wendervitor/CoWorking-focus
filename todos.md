@@ -1,5 +1,21 @@
 ### TODOLIST
 
+ <!-- Front - end -->
+ - [ ] Implement Header
+    - [ ] Exit Button
+
+<!-- Features -->
+ - [ ] Feature to configure time
+ - [ ] Implement a "real" pomodoro(long and short breaks)
+    - [ ] Feature to wait user to init every stage of pomodoro
+ - [ ] Feature to create "private" rooms (only a user have the power of start/stop counter)
+ 
+ <!-- Possible new features -->
+ - [ ] Implement Chat
+ - [ ] Change Beep
+
+
+<!-- DONE -->
  - [x] Make countdown run forever
  - [x] Implement a POMODORO
  - [x] Refactor folders 
@@ -15,16 +31,7 @@
  - [x] Settings Tests
  - [x] Responsive Design
  - [x] Button to stop counter
- 
- - [ ] Implement Header
-    - [ ] Exit Button
- - [ ] Refactor functions of room.js
-    - [ ] Find room function
-    - [ ] setup server 
- 
- - [ ] Feature to configure time
- - [ ] Implement a "real" pomodoro(long and short breaks)
+ - [X] Refactor event handlers
  - [x] Implement a way to stop and delete the counter/room if there's no users
  
- - [ ] Implement Chat
- - [ ] Change Beep
+ 

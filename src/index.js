@@ -4,7 +4,7 @@ const express = require('express');
 const app = express();
 const server = require('http').Server(app);
 
-const { setUpTimer} = require('./timer');
+const { setUpTimer } = require('./socketSetup');
 
 app.use(express.static(path.join(__dirname,'public')));
 

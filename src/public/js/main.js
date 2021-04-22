@@ -71,15 +71,6 @@ const setupCountdown = (time) =>{
     printCountdown(formatTime(time.min),formatTime(time.sec));
 }
 
-const startTimer = () => socket.emit('start');
-const pauseTimer = () => socket.emit('pause');
-const stopTimer = () => {
-    if (confirm("Do you want to cancel the Pomodoro Counter?\n")) {
-        socket.emit('stop');    
-    }
-}
-
-
 form.addEventListener('submit', function(e) {
     e.preventDefault();
     if (input.value) {
@@ -88,9 +79,20 @@ form.addEventListener('submit', function(e) {
     }
 });
 
+
+const startTimer = () => socket.emit('timer:start');
+
+const pauseTimer = () => socket.emit('timer:pause');
+
+const stopTimer = () => {
+    if (confirm("Do you want to cancel the Pomodoro Counter?\n")) {
+        socket.emit('timer:stop');    
+    }
+}
+
 const roomID = getUrlParameter("room");
 
-socket.emit('joinRoom', roomID);
+socket.emit('room:joinRoom', roomID);
 
 socket.on('setup',time => setupCountdown(time))
 
@@ -99,5 +101,8 @@ socket.on('endedTime',time => {
     beep.play();
 })
 
-socket.on('timer', (min,sec) => printCountdown(formatTime(min),formatTime(sec)));
+socket.on('timer', (min,sec) => {
+    console.log("chegou aqui");
+    printCountdown(formatTime(min),formatTime(sec))
+});
 
