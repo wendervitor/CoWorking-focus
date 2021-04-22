@@ -2,8 +2,50 @@
 
 *{
     font-family: 'Ubuntu', sans-serif;
-    box-sizing: border-box;   
-}    
+    box-sizing: border-box;
+    
+}
+
+:root{
+    --primary-text-color: #fff;
+    --secondary-text-color: #ede8e8;
+}
+
+header{
+    width: 40%;
+    padding: 15px;
+    height: 50px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    font-size: 20px;
+    
+} 
+
+
+header .modalBtn,
+header #headerRoom,
+header a{
+    color: var(--secondary-text-color);
+    font-size: 20px;
+}
+
+header .modalBtn{
+    border: none;
+    outline: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+header #headerRoom{
+    margin-right: 20px;
+    
+}
+header a{
+    text-decoration: none;
+}
+
+
 .content{
     text-align: center;
     margin-top: 100px;
@@ -11,7 +53,7 @@
 .content #timer,
 .content #title{
     font-size: 60px;
-    color: #fff;
+    color: var(--primary-text-color);
 }
 
 .content #video{
@@ -49,13 +91,13 @@
 .fa-pause,
 .fa-stop{
     font-size: 50px;
-    text-shadow: 2px 4px 6px #ede8e8;
+    text-shadow: 2px 4px 6px var(--secondary-text-color);
 }
 
 .actionBtn{
     background-color: inherit; 
     border: none; 
-    color: #fff; 
+    color: var(--primary-text-color); 
     cursor: pointer;
     margin: 0px 50px 50px 50px;
     transition: 0.4s;

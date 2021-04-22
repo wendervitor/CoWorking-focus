@@ -12,7 +12,8 @@ testRoom = {
     "countdown": ""
 }
 
-const { createRoom, countdown, joinRoom } = require("../src/utils/rooms")
+//const { createRoom, countdown, joinRoom } = require("../src/utils/rooms")
+const { getRoom } = require('../src/utils/room')
 
 
 describe('Suite of unit tests', function () {
@@ -35,17 +36,17 @@ describe('Suite of unit tests', function () {
     });
 
     describe('CoWorking Focus tests', function () {
-        it('Search existing room ',(done)=>{
-            assert.equal( createRoom("general").id,"general");
+        it('Create and push new room ',(done)=>{
+            assert.equal( getRoom("room1").id,"room1");
+            assert.equal( getRoom("room2").id,"room2");
             done();
         });
-        it('Create and push new room ',(done)=>{
-            assert.equal( createRoom("room1").id,"room1");
-            assert.equal( createRoom("room2").id,"room2");
+        it('Get existing room ',(done)=>{
+            assert.equal( getRoom("room1").id,"room1");
             done();
         });
         it("Join a room", (done)=>{
-            socket.emit('joinRoom',"room1")
+            socket.emit('room:joinRoom',"room1")
             socket.on('setup',(timeLeft)=>{
                 assert.equal(timeLeft.id,testRoom.timeLeft.id);
                 assert.equal(timeLeft.min,testRoom.timeLeft.min);
@@ -53,6 +54,7 @@ describe('Suite of unit tests', function () {
                 done();
             })
         });
+        
     });
 
 });

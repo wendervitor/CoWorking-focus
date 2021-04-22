@@ -6,6 +6,7 @@ const form = document.getElementById('form');
 const input = document.getElementById('input');
 const video =  document.getElementById('video');
 const beep = document.getElementById('beep');
+const headerRoom = document.getElementById('headerRoom')
 
 
 /**
@@ -68,6 +69,7 @@ const setupCountdown = (time) =>{
     const breakTimeColor = "#31d686";
     if(!time.mode) changeBg("Work time !",workColor);
     else changeBg("Have a break !",breakTimeColor);
+    headerRoom.innerHTML = "Room: " + roomID;
     printCountdown(formatTime(time.min),formatTime(time.sec));
 }
 
@@ -94,15 +96,12 @@ const roomID = getUrlParameter("room");
 
 socket.emit('room:joinRoom', roomID);
 
-socket.on('setup',time => setupCountdown(time))
+socket.on('setup',time => setupCountdown(time));
 
 socket.on('endedTime',time => {
     setupCountdown(time);
     beep.play();
-})
-
-socket.on('timer', (min,sec) => {
-    console.log("chegou aqui");
-    printCountdown(formatTime(min),formatTime(sec))
 });
+
+socket.on('timer', (min,sec) => printCountdown(formatTime(min),formatTime(sec)));
 

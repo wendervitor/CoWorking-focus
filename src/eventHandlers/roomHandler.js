@@ -3,14 +3,14 @@ const registerTimerHandlers = require("./timerHandler");
 module.exports = (io, socket) => {
     
     const joinRoom = (roomID) => {
-        if(roomID){
-            let room = getRoom(roomID.toLowerCase());
-            room.users.push(socket.id);
-            socket.join(room);
-            console.log("User " + socket.id + " joined room " + room.id );
-            registerTimerHandlers(io,socket,room);
-            io.to(room).emit('setup',room.timeLeft);
-        }
+        
+        const room = roomID ? getRoom(roomID.toLowerCase()) : getRoom("default");
+
+        room.users.push(socket.id);
+        socket.join(room);
+        console.log("User " + socket.id + " joined room " + room.id );
+        registerTimerHandlers(io,socket,room);
+        io.to(room).emit('setup',room.timeLeft);
     }
 
     const handleUserLeft = () =>{
