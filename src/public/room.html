@@ -9,13 +9,14 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/modal.css">
     <title>CoWorking Focus</title>
 </head>
 <body>
     <header>
         <div> 
             
-            <button disabled="disabled" class="modalBtn">
+            <button id="myBtn" class="modalBtn">
                 <span id="headerTitle">Co-Working Focus</span>
                 <i title="More info" class="fa fa-info-circle" aria-hidden="true"></i>
             </button>
@@ -35,6 +36,17 @@
         </div>  
     </header>
     <main class="content">
+
+        <div id="myModal" class="modal">
+
+            <!-- Modal content -->
+            <div class="modal-content">
+              <span class="close">&times;</span>
+              <p id="modalText"></p>
+            </div>
+          
+        </div>
+
         <h1 id="title">Work Time !</h1>
         <h2 id="timer"></h2>
         <button class="actionBtn" onclick="startTimer();">

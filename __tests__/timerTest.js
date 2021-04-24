@@ -13,7 +13,7 @@ testRoom = {
 }
 
 //const { createRoom, countdown, joinRoom } = require("../src/utils/rooms")
-const { getRoom } = require('../src/utils/room')
+const { getRoom} = require('../src/utils/room');
 
 
 describe('Suite of unit tests', function () {
@@ -46,15 +46,14 @@ describe('Suite of unit tests', function () {
             done();
         });
         it("Join a room", (done)=>{
-            socket.emit('room:joinRoom',"room1")
+            socket.emit('room:joinRoom',"room1");
             socket.on('setup',(timeLeft)=>{
                 assert.equal(timeLeft.id,testRoom.timeLeft.id);
                 assert.equal(timeLeft.min,testRoom.timeLeft.min);
                 assert.equal(timeLeft.sec,testRoom.timeLeft.sec);
                 done();
-            })
-        });
-        
+            });
+        });        
     });
 
 });
