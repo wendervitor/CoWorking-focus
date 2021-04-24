@@ -12,7 +12,7 @@ module.exports = (io, socket,room) => {
             io.to(room).emit('timer',room.timeLeft.min,room.timeLeft.sec);   
         }
         else if(room.timeLeft.sec == 0 && room.timeLeft.min == 0){
-            room = handlePomodoroChange(room);
+            handlePomodoroChange(room);
             io.to(room).emit('endedTime',room.timeLeft);
         } 
     }

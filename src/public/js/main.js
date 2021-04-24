@@ -67,8 +67,19 @@ const printCountdown = (min, sec) => {
 const setupCountdown = (time) =>{
     const workColor = "#eb534d";
     const breakTimeColor = "#31d686";
-    if(!time.mode) changeBg("Work time !",workColor);
-    else changeBg("Have a break !",breakTimeColor);
+    
+    switch(time.state){
+        case "work": 
+            changeBg("Work time !",workColor);
+        break;
+        case "shortBreak":
+            changeBg("Take a short break !",breakTimeColor);
+        break;
+        case "longBreak":
+            changeBg("Take a long break !",breakTimeColor);
+        break;
+
+    }
     headerRoom.innerHTML = "Room: " + roomID;
     printCountdown(formatTime(time.min),formatTime(time.sec));
 }
@@ -104,10 +115,6 @@ socket.on('endedTime',time => {
 });
 
 socket.on('timer', (min,sec) => printCountdown(formatTime(min),formatTime(sec)));
-
-
-
-
 
 // Get the modal
 const modal = document.getElementById("myModal");
