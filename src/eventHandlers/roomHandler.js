@@ -2,13 +2,12 @@ const { getRoom, getRoomBySocketID, removeRoom } = require('../utils/room')
 const registerTimerHandlers = require("./timerHandler");
 module.exports = (io, socket) => {
     
-    const joinRoom = (roomID) => {
-        
+    const joinRoom = (roomID) => {        
         const room = roomID ? getRoom(roomID.toLowerCase()) : getRoom("default");
-
         room.users.push(socket.id);
         socket.join(room);
         console.log("User " + socket.id + " joined room " + room.id );
+        
         registerTimerHandlers(io,socket,room);
         io.to(room).emit('setup',room.timeLeft);
     }

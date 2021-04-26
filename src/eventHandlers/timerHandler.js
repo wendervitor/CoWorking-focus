@@ -1,5 +1,5 @@
 const { handlePomodoroChange, resetTimer } = require('../utils/room')
-module.exports = (io, socket,room) => {
+module.exports = (io, socket, room) => {
 
     //Control the countdown timer and emit the state of timer.
     const countdown = () =>{

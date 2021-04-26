@@ -4,11 +4,12 @@ const findRoom = (roomID) =>{
     return rooms.find(r => r.id == roomID);
 }
 
-// "initial" settings to start pomodoro
-const configureRoomTimer = (room) =>{
-    room.timeLeft.state = room.pomodoro[0].state;
-    room.timeLeft.min = room.pomodoro[0].time[0];
-    room.timeLeft.sec = room.pomodoro[0].time[1];
+
+//set the counter to a given stage(work, short break or long break).
+const setPomodoroState = (room,stateIndex) =>{
+    room.timeLeft.state = room.pomodoro[stateIndex].state;
+    room.timeLeft.min = room.pomodoro[stateIndex].time[0];
+    room.timeLeft.sec = room.pomodoro[stateIndex].time[1];
 }
 
 /**
@@ -25,17 +26,14 @@ const getRoom = (roomID) => {
             "counter": 0,
             "pomodoro": [
                 { 
-                    "id": 0,
                     "state": "work",
                     "time": [25,0]
                 },
                 {
-                    "id": 1,
                     "state": "shortBreak",
                     "time": [5,0]
                 },
                 {
-                    "id": 2,
                     "state": "longBreak",
                     "time": [15,0]
                 }
@@ -44,7 +42,7 @@ const getRoom = (roomID) => {
             "countdown": "",
             "users":[]
         }
-        configureRoomTimer(room);
+        setPomodoroState(room,0);
         rooms.push(room);
     }
     return room;
@@ -58,9 +56,8 @@ const resetTimer = (room) =>{
     if(room){
         clearInterval(room.countdown);
         room.started = false;
-        room.timeLeft.mode = room.pomodoro[0].id;
-        room.timeLeft.min = room.pomodoro[0].time[0];
-        room.timeLeft.sec = room.pomodoro[0].time[1];
+        setPomodoroState(room,0);
+        room.counter = 0;
     }
 }
 
@@ -69,31 +66,19 @@ const removeRoom = (room) => {
     resetTimer(room)
 }
 
-
 //handle timer when a pomodoro is complete
 const handlePomodoroChange = (room) => {
+    let stateIndex = 0; // 0 - Work; 1 - Short Break; 2 - Long Break; 
 
     if(room.counter == 3 && room.timeLeft.state == "work"){
-        //LONG BREAK
         room.counter = 0;
-        room.timeLeft.state = room.pomodoro[2].state;
-        room.timeLeft.min = room.pomodoro[2].time[0];
-        room.timeLeft.sec = room.pomodoro[2].time[1];
-    }else{
-        if(room.timeLeft.state == "work"){
-            //SHORT BREAK
-            room.counter++;
-            room.timeLeft.state = room.pomodoro[1].state;
-            room.timeLeft.min = room.pomodoro[1].time[0];
-            room.timeLeft.sec = room.pomodoro[1].time[1];
-
-        }else{
-            //WORK TIME
-            room.timeLeft.state = room.pomodoro[0].state;
-            room.timeLeft.min = room.pomodoro[0].time[0];
-            room.timeLeft.sec = room.pomodoro[0].time[1];
-        }
+        stateIndex = 2;
     }
+    else if(room.counter < 3 && room.timeLeft.state == "work"){
+        room.counter++;
+        stateIndex = 1;
+    }
+    return setPomodoroState(room,stateIndex);
 }
 
 module.exports = {

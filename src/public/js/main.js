@@ -84,6 +84,7 @@ const setupCountdown = (time) =>{
     printCountdown(formatTime(time.min),formatTime(time.sec));
 }
 
+//Form to embed YouTube video
 form.addEventListener('submit', function(e) {
     e.preventDefault();
     if (input.value) {
@@ -92,7 +93,13 @@ form.addEventListener('submit', function(e) {
     }
 });
 
+const roomID = getUrlParameter("room");
+socket.emit('room:joinRoom', roomID);
 
+
+
+
+/* TIMER CONTROLLERS */
 const startTimer = () => socket.emit('timer:start');
 
 const pauseTimer = () => socket.emit('timer:pause');
@@ -103,9 +110,7 @@ const stopTimer = () => {
     }
 }
 
-const roomID = getUrlParameter("room");
-
-socket.emit('room:joinRoom', roomID);
+/* SOCKET LISTENERS */
 
 socket.on('setup',time => setupCountdown(time));
 
@@ -115,39 +120,3 @@ socket.on('endedTime',time => {
 });
 
 socket.on('timer', (min,sec) => printCountdown(formatTime(min),formatTime(sec)));
-
-// Get the modal
-const modal = document.getElementById("myModal");
-
-// Get the button that opens the modal
-const btn = document.getElementById("myBtn");
-
-
-const modalText = document.getElementById("modalText");
-
-// Get the <span> element that closes the modal
-const span = document.getElementsByClassName("close")[0];
-
-// When the user clicks on the button, open the modal
-btn.onclick = function() {
-    modalText.innerText = "CoWorking Focus is a open-source app, you can see the source code ";
-    const githubLink = document.createElement('a');
-    const text = document.createTextNode("here");
-    githubLink.appendChild(text);
-    githubLink.href="https://github.com/wendervitor/work-together";
-    modalText.appendChild(githubLink);
-    modal.style.display = "block";
-}
-
-// When the user clicks on <span> (x), close the modal
-span.onclick = function() {
-  modal.style.display = "none";
-  
-}
-
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
-  if (event.target == modal) {
-    modal.style.display = "none";
-  }
-} 
