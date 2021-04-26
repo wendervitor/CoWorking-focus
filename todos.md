@@ -8,8 +8,8 @@
 
 <!-- Features -->
  - [ ] Feature to configure time
- - [ ] Implement a "real" pomodoro(long and short breaks)
-  - [ ] Feature to wait user to start every stage of pomodoro
+ - [x] Implement a "real" pomodoro(long and short breaks)
+ - [ ] Feature to wait user to start every stage of pomodoro
  - [ ] Feature to create "private" rooms (only a user have the power of start/stop counter)
  - [ ] Documentation 
  

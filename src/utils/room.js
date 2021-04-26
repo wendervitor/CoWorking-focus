@@ -4,12 +4,18 @@ const findRoom = (roomID) =>{
     return rooms.find(r => r.id == roomID);
 }
 
+// "initial" settings to start pomodoro
 const configureRoomTimer = (room) =>{
     room.timeLeft.state = room.pomodoro[0].state;
     room.timeLeft.min = room.pomodoro[0].time[0];
     room.timeLeft.sec = room.pomodoro[0].time[1];
 }
 
+/**
+ * search a room and return it. If the room is not found, create a new one and return it.
+ * @param {id to be searched} roomID 
+ * @returns the room needed, whether is a new or existing one
+ */
 const getRoom = (roomID) => {
     let room = findRoom(roomID);
     if(!room){
@@ -21,17 +27,17 @@ const getRoom = (roomID) => {
                 { 
                     "id": 0,
                     "state": "work",
-                    "time": [0,10]
+                    "time": [25,0]
                 },
                 {
                     "id": 1,
                     "state": "shortBreak",
-                    "time": [0,5]
+                    "time": [5,0]
                 },
                 {
                     "id": 2,
                     "state": "longBreak",
-                    "time": [0,2]
+                    "time": [15,0]
                 }
             ],
             "timeLeft":{},
@@ -63,6 +69,8 @@ const removeRoom = (room) => {
     resetTimer(room)
 }
 
+
+//handle timer when a pomodoro is complete
 const handlePomodoroChange = (room) => {
 
     if(room.counter == 3 && room.timeLeft.state == "work"){

@@ -1,6 +1,7 @@
 const { handlePomodoroChange, resetTimer } = require('../utils/room')
 module.exports = (io, socket,room) => {
 
+    //Control the countdown timer and emit the state of timer.
     const countdown = () =>{
         if(room.timeLeft.sec != 0){
             room.timeLeft.sec -= 1;       
