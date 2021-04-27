@@ -1,17 +1,13 @@
 # TODOLIST
 
 ## TODO
- <!-- Front - end -->
- - [ ] Implement Header
-  - [x] Exit Button
-  - [ ] About Button(modal)
-
+<!-- Front - end -->
+- [ ] Responsive design in room page
 <!-- Features -->
- - [ ] Feature to configure time
- - [x] Implement a "real" pomodoro(long and short breaks)
- - [ ] Feature to wait user to start every stage of pomodoro
- - [ ] Feature to create "private" rooms (only a user have the power of start/stop counter)
- - [ ] Documentation 
+ - [ ] Feature to configure timer
+  - [x] Auto Start on/off
+ - [ ] Feature to create "private" rooms (only one user have the power of start/stop counter)
+ - [ ] More tests
  
  <!-- Possible new features -->
  - [ ] Implement Chat
@@ -37,5 +33,6 @@
  - [x] Button to stop counter
  - [X] Refactor event handlers
  - [x] Implement a way to stop and delete the counter/room if there's no users
- 
+ - [x] Implement Header
+ - [x] Implement a "real" pomodoro(long and short breaks)
  

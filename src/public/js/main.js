@@ -65,8 +65,9 @@ const printCountdown = (min, sec) => {
  * @param {current time} time 
  */
 const setupCountdown = (time) =>{
-    const workColor = "#eb534d";
-    const breakTimeColor = "#31d686";
+    const workColor = "#b26c85";
+    const breakTimeColor = "#85b26c";
+    const longBreakColor = "#6c85b2"
     
     switch(time.state){
         case "work": 
@@ -76,7 +77,7 @@ const setupCountdown = (time) =>{
             changeBg("Take a short break !",breakTimeColor);
         break;
         case "longBreak":
-            changeBg("Take a long break !",breakTimeColor);
+            changeBg("Take a long break !",longBreakColor);
         break;
 
     }

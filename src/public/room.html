@@ -9,14 +9,13 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     
     <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/modal.css">
     <title>CoWorking Focus</title>
 </head>
 <body>
     <header>
         <div> 
             
-            <button id="myBtn" class="modalBtn">
+            <button id="infoBtn" class="modalBtn">
                 <span id="headerTitle">Co-Working Focus</span>
                 <i title="More info" class="fa fa-info-circle" aria-hidden="true"></i>
             </button>
@@ -25,7 +24,7 @@
         <div>
             <span id="headerRoom">Room: </span>
             
-            <button disabled="disabled"  class="modalBtn">
+            <button id="settingsBtn" class="modalBtn">
                 <i title="Settings" class="fa fa-cog" aria-hidden="true"></i>
             </button>
             
@@ -37,14 +36,27 @@
     </header>
     <main class="content">
 
-        <div id="myModal" class="modal">
-
-            <!-- Modal content -->
+        <div id="infoModal" class="modal">
             <div class="modal-content">
-              <span class="close">&times;</span>
-              <p id="modalText"></p>
-            </div>
-          
+                <span class="close">&times;</span>
+                <p>Thank you for using CoWorking Focus !<br><br>
+                  The next step is share this site URL or the room ID with whom you want to join.
+                  <br><br>CoWorking Focus is a open-source app, you can see the source code <a href="https://github.com/wendervitor/work-together">here</a>
+                </p>
+            </div>  
+        </div>
+
+        <div id="settingsModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <div>   
+                    <div>
+                        <input type="checkbox" name="autostart" id="isAutoStarted">
+                        <label for="autostart" >Auto Start ?</label>
+                    </div>
+                    <button type="submit" onclick="applySettings()">OK</button>
+                </div>
+            </div>  
         </div>
 
         <h1 id="title">Work Time !</h1>
@@ -58,7 +70,6 @@
         <button class="actionBtn" onclick="stopTimer();">
             <i class="fa fa-stop" aria-hidden="true"></i>
         </button>
-        <!-- <button disabled="disabled">Stop</button> -->
         <form id="form" action="">
             <input 
                 id="input" 

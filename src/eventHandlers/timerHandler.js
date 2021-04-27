@@ -38,8 +38,14 @@ module.exports = (io, socket, room) => {
             io.to(room).emit('setup',room.timeLeft);
         }
     }
+
+    const applySettings = (settings) =>{
+        // console.log(settings);
+        room.autostart = settings.isAutoStarted;
+    }
     
     socket.on('timer:start', startTimer);
     socket.on('timer:pause', pauseTimer);
     socket.on('timer:stop', stopTimer);
+    socket.on('timer:settings',applySettings)
 }
