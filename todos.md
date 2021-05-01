@@ -3,11 +3,12 @@
 ## TODO
 <!-- Front - end -->
 - [ ] Responsive design in room page
+- [ ] Better design in Modals and forms
+
 <!-- Features -->
- - [ ] Feature to configure timer
-  - [x] Auto Start on/off
  - [ ] Feature to create "private" rooms (only one user have the power of start/stop counter)
  - [ ] More tests
+ - [ ] Add Linter and Prettier
  
  <!-- Possible new features -->
  - [ ] Implement Chat
@@ -35,4 +36,5 @@
  - [x] Implement a way to stop and delete the counter/room if there's no users
  - [x] Implement Header
  - [x] Implement a "real" pomodoro(long and short breaks)
+ - [x] Feature to configure timer
  

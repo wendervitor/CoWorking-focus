@@ -34,9 +34,13 @@ window.onclick = function(event) {
 
 const applySettings = () =>{
   const isAutoStarted = document.getElementById("isAutoStarted").checked;
-  // console.log(isAutoStarted.checked);
+  const settingsTimer = document.getElementsByClassName("settingsTimer")
+  //console.log(settingsTimer[0].value);
   const settings = {
     isAutoStarted,
+    "pomodoroMin":settingsTimer[0].value,
+    "shortBreakMin":settingsTimer[1].value,
+    "longBreakMin":settingsTimer[2].value,
   }
   socket.emit('timer:settings',settings);
   closeModal(modalObject[1]);

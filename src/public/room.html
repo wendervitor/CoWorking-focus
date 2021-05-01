@@ -52,8 +52,11 @@
                 <div>   
                     <div>
                         <input type="checkbox" name="autostart" id="isAutoStarted">
-                        <label for="autostart" >Auto Start ?</label>
+                        <label for="autostart" >Auto Start</label>
                     </div>
+                    <input type="number" name="pomodoroMin" class="settingsTimer" min="1" value="25">
+                    <input type="number" name="shortBreakMin" class="settingsTimer" min="1" value="5">
+                    <input type="number" name="longBreakMin" class="settingsTimer" min="1" value="15">
                     <button type="submit" onclick="applySettings()">OK</button>
                 </div>
             </div>  

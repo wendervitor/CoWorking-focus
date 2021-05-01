@@ -20,15 +20,15 @@ const createRoom = (roomID) => {
         "pomodoro": [
             { 
                 "state": "work",
-                "time": [0,5]
+                "time": [25,0]
             },
             {
                 "state": "shortBreak",
-                "time": [0,5]
+                "time": [5,0]
             },
             {
                 "state": "longBreak",
-                "time": [0,5]
+                "time": [15,0]
             }
         ],
         "timeLeft":{},
@@ -95,6 +95,7 @@ const handlePomodoroChange = (room) => {
 module.exports = {
     getRoom,
     getRoomBySocketID,
+    setPomodoroState,
     resetTimer,
     removeRoom,
     handlePomodoroChange
