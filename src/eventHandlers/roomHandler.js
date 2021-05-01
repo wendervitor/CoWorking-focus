@@ -6,9 +6,9 @@ module.exports = (io, socket) => {
         const room = roomID ? getRoom(roomID.toLowerCase()) : getRoom("default");
         room.users.push(socket.id);
         socket.join(room);
-        console.log("User " + socket.id + " joined room " + room.id );
-        
         registerTimerHandlers(io,socket,room);
+        
+        console.log("User " + socket.id + " joined room " + room.id );
         io.to(room).emit('setup',room.timeLeft);
     }
 
