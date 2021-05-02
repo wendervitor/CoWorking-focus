@@ -120,4 +120,4 @@ socket.on('endedTime',time => {
     beep.play();
 });
 
-socket.on('timer', (min,sec) => printCountdown(formatTime(min),formatTime(sec)));
+socket.on('timer', (time) => printCountdown(formatTime(time.min),formatTime(time.sec)));

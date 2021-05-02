@@ -7,7 +7,6 @@
 
 <!-- Features -->
  - [ ] Feature to create "private" rooms (only one user have the power of start/stop counter)
- - [ ] More tests
  - [ ] Add Linter and Prettier
  
  <!-- Possible new features -->

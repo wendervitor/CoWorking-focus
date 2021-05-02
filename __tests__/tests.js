@@ -5,7 +5,7 @@ const assert = require("chai").assert;
 
 const registerRoomHandlers = require("../src/eventHandlers/roomHandler");
 
-const { getRoomBySocketID, getRoom, handlePomodoroChange} = require("../src/utils/room")
+const { getRoomBySocketID, getRoom, handlePomodoroChange, handlePomodoroTimer} = require("../src/utils/room")
 
 describe("CoWorking Focus Testing", () => {
     let io, serverSocket, clientSocket;
@@ -53,26 +53,9 @@ describe("CoWorking Focus Testing", () => {
             done();
         }); 
     });
-    describe("Timer actions tests",()=>{
-        it('Start Timer ', ()=>{
-            clientSocket.emit('timer:start');
-            clientSocket.on('timer',(min,sec) =>{
-                assert.equal(min,24);
-                assert.equal(sec,59);
-                assert.equal(getRoomBySocketID(clientSocket.id).started,true);
-                done();
-            })
-        });
-        // it('Pause Timer',()=>{
-        //     //  TODO   
-        // });
-        // it('Stop Timer',()=>{
-        //     //  TODO   
-        // });
-    })
     describe("Pomodoro changes", ()=>{
         let room;
-        beforeEach(function(done) {
+        beforeEach((done) => {
             room = getRoomBySocketID(clientSocket.id);
             room.autostart = true;
             handlePomodoroChange(room);
@@ -96,6 +79,27 @@ describe("CoWorking Focus Testing", () => {
             assert.equal(room.timeLeft.state,'work')
             done();
         });
-    })
+    });
+    describe("Timer tests",()=>{
+        let room;
+        before((done)=>{
+            room = getRoomBySocketID(clientSocket.id);
+            done();
+        })
+        it('Sec == 0 && Min != 0 (timer continue)',(done)=>{
+            assert.equal(handlePomodoroTimer(room),'timer');
+            done()
+        })
+        it('Sec != 0 && Min == 0 (timer continue)',(done)=>{
+            assert.equal(handlePomodoroTimer(room),'timer');
+            done();
+        });
+        it('Sec == 0 && Min == 0 (timer end)',(done)=>{
+            room.timeLeft.min=0;
+            room.timeLeft.sec=0;
+            assert.equal(handlePomodoroTimer(room),'endedTime');
+            done();
+        });
+    });
 
   });

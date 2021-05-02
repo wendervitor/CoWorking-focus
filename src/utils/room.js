@@ -92,11 +92,26 @@ const handlePomodoroChange = (room) => {
     return setPomodoroState(room,stateIndex);
 }
 
+const handlePomodoroTimer = (room) =>{
+    if(room.timeLeft.sec == 0 && room.timeLeft.min == 0){
+        handlePomodoroChange(room);
+        return 'endedTime';
+    }
+    if(room.timeLeft.sec != 0) 
+        room.timeLeft.sec -= 1
+    else if(room.timeLeft.sec == 0 && room.timeLeft.min != 0){
+        room.timeLeft.min -= 1;
+        room.timeLeft.sec = 59;
+    }
+    return 'timer';
+}
+
 module.exports = {
     getRoom,
     getRoomBySocketID,
     setPomodoroState,
     resetTimer,
     removeRoom,
-    handlePomodoroChange
+    handlePomodoroChange,
+    handlePomodoroTimer
 }

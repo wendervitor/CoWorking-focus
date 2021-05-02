@@ -1,21 +1,8 @@
-const { handlePomodoroChange,setPomodoroState, resetTimer } = require('../utils/room')
+const { setPomodoroState, resetTimer, handlePomodoroTimer } = require('../utils/room')
 module.exports = (io, socket, room) => {
-
-    //Control the countdown timer and emit the state of timer.
+    
     const countdown = () =>{
-        if(room.timeLeft.sec != 0){
-            room.timeLeft.sec -= 1;       
-            io.to(room).emit('timer',room.timeLeft.min,room.timeLeft.sec);
-        }
-        else if(room.timeLeft.sec == 0 && room.timeLeft.min != 0){
-            room.timeLeft.min -= 1;
-            room.timeLeft.sec = 59;
-            io.to(room).emit('timer',room.timeLeft.min,room.timeLeft.sec);   
-        }
-        else if(room.timeLeft.sec == 0 && room.timeLeft.min == 0){
-            handlePomodoroChange(room);
-            io.to(room).emit('endedTime',room.timeLeft);
-        } 
+        io.to(room).emit(handlePomodoroTimer(room),room.timeLeft);
     }
     
     const startTimer = () => {
