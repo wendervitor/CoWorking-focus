@@ -24,6 +24,9 @@ header{
     justify-content: space-between;
     font-size: 20px;
     
+}
+hr{
+    color: var(--hover-color);
 } 
 
 
@@ -116,7 +119,7 @@ header a{
     display: flex;
     -webkit-column-width: 150px;
     -moz-column-width: 150px;
-         column-width: 150px;
+    column-width: 150px;
 }
 
 .column {
@@ -161,14 +164,28 @@ header a{
     margin: 20% auto;
     padding: 20px;
     border: 1px solid var(--secondary-text-color);
-    width: 40%;
+    width: 30%;
     border-radius: 10px;
 }
 
+
+.modal-title{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* padding: 20px; */
+}
+
+.modal-title h3{
+    margin: 0;
+    font-size: 25px;
+    align-items: center;
+    color: var(--secondary-text-color);
+}
 /* The Close Button */
 .close {
     color: var(--secondary-text-color);
-    float: right;
+    /* float: right; */
     font-size: 38px;
     font-weight: bold;
     transition: 0.4s;
@@ -179,12 +196,44 @@ header a{
     color: black;
     text-decoration: none;
     cursor: pointer;
-} 
+}
+
+#pomodoro-settings{
+    text-align: left;
+}
+#pomodoro-settings  h3{
+    color: black;
+    opacity: 0.4;
+}
+#pomodoro-settings .timerInputs{
+    display: flex;
+}
+.configureTimer{
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    text-align: left;
+    margin-right: 10px;
+}
+.configureTimer span{
+    /* color: var(--secondary-text-color); */
+    margin-bottom: 5px;
+}
+.configureTimer input{
+    width: 50%;
+}
+
+
+
 
 @media only screen and (max-width: 950px) {
     .row{
         flex-direction: column;
     }
+    header{
+        width: 100%;
+    }
+
 }
 
 @media only screen and (max-width: 580px) {

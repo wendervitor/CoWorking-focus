@@ -38,7 +38,11 @@
 
         <div id="infoModal" class="modal">
             <div class="modal-content">
-                <span class="close">&times;</span>
+                <div class="modal-title">
+                    <h3>About</h3>
+                    <span class="close">&times;</span>
+                </div>
+                <hr>
                 <p>Thank you for using CoWorking Focus !<br><br>
                   The next step is share this site URL or the room ID with whom you want to join.
                   <br><br>CoWorking Focus is a open-source app, you can see the source code <a href="https://github.com/wendervitor/work-together">here</a>
@@ -48,17 +52,37 @@
 
         <div id="settingsModal" class="modal">
             <div class="modal-content">
-                <span class="close">&times;</span>
-                <div>   
-                    <div>
-                        <input type="checkbox" name="autostart" id="isAutoStarted">
-                        <label for="autostart" >Auto Start</label>
+                
+                <div class="modal-title">
+                    <h3>Settings</h3>
+                    <span class="close">&times;</span>
+                </div>
+                <hr>
+                
+                <div id="pomodoro-settings">
+                    <h3>Time Settings (in min)</h3>
+                    <div class="timerInputs">
+                        <div class="configureTimer">
+                            <span>Work</span>
+                            <input type="number" name="pomodoroMin" class="settingsTimer" min="1" value="25">
+                        </div>
+                        <div class="configureTimer">
+                            <span>Short Break</span>
+                            <input type="number" name="shortBreakMin" class="settingsTimer" min="1" value="5">
+                        </div>
+                        <div class="configureTimer">
+                            <span>Long Break</span>
+                            <input type="number" name="longBreakMin" class="settingsTimer" min="1" value="15">
+                        </div>
                     </div>
-                    <input type="number" name="pomodoroMin" class="settingsTimer" min="1" value="25">
-                    <input type="number" name="shortBreakMin" class="settingsTimer" min="1" value="5">
-                    <input type="number" name="longBreakMin" class="settingsTimer" min="1" value="15">
+                    
+                    <div class="timerInputs">
+                        <h3>Auto Start? </h3>
+                        <input type="checkbox" name="autostart" id="isAutoStarted">
+                    </div>
                     <button type="submit" onclick="applySettings()">OK</button>
                 </div>
+
             </div>  
         </div>
 
